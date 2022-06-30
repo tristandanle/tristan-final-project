@@ -6,7 +6,7 @@ The folder csv contain file that can be downloaded my admin from the Admin contr
 
 Each user has his/her photo folder once he/she uploads the picture into the account
 
-Project technologies are Spring Boot, Spring MVC, Spring Jpa, Spring Security, HTML, Javascript, Bootstrap, and MySql.
+Project technologies are Spring Boot, Spring MVC, Spring Jpa and Unit Test, Spring Security, HTML, Javascript, Bootstrap, and MySql.
 
-Happy learning :)
+
 
