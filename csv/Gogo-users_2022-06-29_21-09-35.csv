@@ -1,0 +1,9 @@
+# ID,Email,First Name,Last Name,Roles,Enabled
+5,jimmy.bruce@gmail.com,Jimmy,Bruce,[Editor],true
+4,james.carey@gmail.com,James,Carey,[Manager],true
+3,george.cloney@gmail.com,George,Cloney,[Editor],true
+1,andy.davis@gmail.com,Andy,Davis,[Admin],true
+8,toby.jones@hotmail.com,Toby,Jones,[Customerservice],true
+7,phyllis.murphy@gmail.com,Phyllis,Murphy,[Director],true
+6,kelly.preston@gmail.com,Kelly,Preston,[Editor],true
+2,angela.price@gmail.com,Angela,Price,[Admin],true

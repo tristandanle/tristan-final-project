@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+		<head th:replace="fragments :: page_head('Home - Gogo Wecome')" ></head>
+		<body>
+				<div class="container-fluid">
+				             <!-- Nav Bar -->
+					         <div th:replace="menu :: navbar"></div>
+					         <!-- End Nav Bar -->
+					         
+					         Welcome 
+					         <a th:href="@{/account}" sec:authentication="principal.fullname"></a>
+					         <span sec:authentication="principal.authorities"></span>     
+					                     
+				             <div>
+						     		<a  th:href="@{/users}" sec:authorize="hasAuthority('Admin')" style="text-decoration: none"><h1 >Enter Admin Control Panel</h1></a>
+						    </div>
+				 </div>
+		 </body>
+</html>

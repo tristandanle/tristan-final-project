@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+           xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: page_head('Users - Gogo Admin Dashboard')" ></head>
+
+  <body>
+    <div class="container-fluid">
+           <!-- Nav Bar -->
+           <div th:replace="menu :: navbar"></div>
+           <!-- End Nav Bar --> 
+			<!-- Body Tittle / User & CSV icons -->
+			<div>
+				<h2 class="row justify-content-center">Users Management Dashboard</h2>	
+				<a th:href="@{/users/create}" class="fas fa-user-plus fa-2x icon-dark mr-2 mb-4" style="text-decoration: none"></a>
+					<!-- Export to CSV -->
+				<a th:href="@{/users/download/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2 mb-4"></a>
+			</div>
+			<!-- End Body Title / User & CSV icons -->
+			
+		
+			
+			
+            <!-- Warning message -->
+		     <div th:if="${message != null}" class="alert alert-success text-center">
+		            [[${message}]]
+		     </div>	
+            <!--  End Warning message -->
+            <!-- Table displayed users data -->
+            <div style="overflow-x:auto;">
+                   <table class="table table-bordered table-striped table-hover table-responsive-xl">
+                       <!--  columns labels -->
+                       <thead class="table-light">
+                                  <tr>
+									    <th th:replace="fragments :: column_link('id', 'User ID')" />
+										<th>Photos</th>
+										<th th:replace="fragments :: column_link('email', 'E-mail')" />
+										<th th:replace="fragments :: column_link('firstName', 'First Name')" />
+										<th th:replace="fragments :: column_link('lastName', 'Last Name')" />
+										<th>Roles</th>
+										<th>
+												<a th:if="${sortField != 'enabled'}" class="text-black"
+													th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${sortDir}}">
+													Enabled
+												</a>
+												<a th:if="${sortField == 'enabled'}" class="text-black"
+													th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${reverseSortDir}}">
+													Enabled
+												</a>
+												<span th:if="${sortField == 'enabled'}"
+													th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>					
+										</th>
+								</tr>	
+                        </thead>
+                         <!-- Table displayed data from controller -->
+                         <tbody>
+                                <tr th:each="user : ${listUsers}" >
+                                      <td>[[${user.id}]]</td>
+                                      <td>
+						                      <span th:if="${user.photos == null}" class="fas fa-portrait fa-3x icon-silver"></span>
+						                     <img th:if="${user.photos != null}" th:src="@{${user.photosImagePath}}" style="width:100px"/>
+						              </td>
+                                      <td>[[${user.email}]]</td>
+                                      <td>[[${user.firstName}]]</td>
+                                      <td>[[${user.lastName}]]</td>
+                                      <td>[[${user.roles}]]</td>
+                                      <td>
+						                      <a th:if="${user.enabled == true}" class="fas fa-check-circle fa-2x " style="text-decoration: none" th:href="@{/users/{id}/enabled/false(id=${user.id})}"  title="Disable this user"></a>
+						                      <a th:if="${user.enabled == false}" class="fas fa-circle fa-2x icon-dark" style="text-decoration: none" th:href="@{/users/{id}/enabled/true(id=${user.id})}" title="Enable this user"></a>
+					                    </td>            
+					                    <td>
+							                    <a class="fas fa-edit fa-2x " style="text-decoration: none" th:href="@{/users/edit/{id}(id=${user.id})}" title="Edit this user"> </a>
+							                     &nbsp; 
+							                    <a class="fas fa-trash fa-2x icon-red link-delete" th:href="@{/users/delete/{id}(id=${user.id})}"  th:userId="${user.id}" id="linkDelete" title="Delete this user"></a> 
+					                    </td>
+                                </tr>
+                         </tbody>
+                   </table>
+            </div>
+            <!-- End Table displayed users data -->
+         </div>	 
+         <!-- End of  container-fluid class -->
+
+         <!-- Page Info message -->
+	    <div class="text-center m-1" th:if="${totalItems > 0}">
+			<span>users # [[${startCount}]] to [[${endCount}]] of [[${totalItems}]]</span>
+		</div>
+		<div class="text-center m-1" th:unless="${totalItems > 0}">
+			<span>No users found</span>
+		</div>
+        <!-- End Page Info message -->	
+		
+       <!-- Showing navigation pages bar -->			
+		<div th:if="${totalPages > 1}">
+					<nav>
+					  <ul class="pagination justify-content-center">
+					    <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+					    	<a th:replace="fragments :: page_link(1, 'First')"></a>
+					    </li>		  
+					    <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+					    	<a th:replace="fragments :: page_link(${currentPage - 1}, 'Previous')"></a>
+					    </li>
+					    
+					    <li th:class="${currentPage != i ? 'page-item': 'page-item active'}" 
+					    	th:each="i : ${#numbers.sequence(1, totalPages)}">
+					    	<a th:replace="fragments :: page_link(${i}, ${i})"></a>
+					    </li>
+					    
+					    <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+					    	<a th:replace="fragments :: page_link(${currentPage + 1}, 'Next')"></a>
+					    </li>
+					    
+					    <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+					    	<a th:replace="fragments :: page_link(${totalPages}, 'Last')"></a>
+					    </li>		    
+					  </ul>
+					</nav>	
+			</div>
+            <!-- End Showing navigation pages bar -->
+
+           <!-- Modal Box Delete User Confirmation -->
+            <div class="modal  text-center" id="confirmModal">
+			            <div class="modal-dialog">
+			                 <div class="modal-content">
+			                     <div class="modal-header">
+			                           <h4 class="modal-title" id="modalTitle">Delete Confirmation </h4>
+			                           <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+			                     </div>
+			                     <div class="modal-body">
+			                          <span id="confirmText"></span>
+			                     </div>
+			                     <div class="modal-footer">
+			                         <a class="btn btn-primary" href=""  id="yesButton">Yes</a>
+			                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+			                     </div>
+			                 </div>
+			            </div>
+	          </div>
+             <!-- End Modal Box Delete User Confirmation -->
+
+			<!-- Javascript -->
+			<script type="text/javascript">
+			        $(document).ready(function() {
+			        	$(".link-delete").on("click", function(e) {
+			        		e.preventDefault();
+			        		link = $(this);
+			        		userId = link.attr("userId");
+			        		$("#yesButton").attr("href", link.attr("href"));
+			        		$("#confirmText").text("Are you sure want to delelte this user ID " + userId + "?");
+			        		$("#confirmModal").modal('show');
+			        	});
+			        });
+			</script>
+			<!-- End Javascript -->
+    </body>
+</html>
