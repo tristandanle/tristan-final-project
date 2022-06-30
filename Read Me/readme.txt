@@ -1,1 +1,1 @@
-Only the person with the assigned role as Admin can access to the Admin Control Panel.
+This application is designed for the person who has the role of Admin can access to the the Admin Control Panel to create or update users that can only view their personal account for modifier password, name, or photos.
