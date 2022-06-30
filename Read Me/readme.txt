@@ -1,6 +1,6 @@
 This application is designed for the person who has the role of Admin can access to the the Admin Control Panel to create or update users. And users are allowed only to view their personal account if wanting to modify password, name, or photos.
 
-The folder csv contain file that can be downloaded my admin from the Admin control pannel
+The folder csv contain file that can be downloaded in the control pannel by those who the have admin role 
 
 Each user has his/her photo folder once he/she uploads the picture into the account
 
