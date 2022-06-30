@@ -8,7 +8,7 @@ Users data and photos are fictional for the project works
 
 Sql script is used to insert users information into database tables 
 
-Project technologies are Spring Boot, Spring MVC, Spring Jpa and Unit Test, Spring Security, HTML, Javascript,Jquery Bootstrap, and MySql.
+Project technologies are Spring Boot, Spring MVC, Spring Jpa and Unit Test, Spring Security, HTML, Thymeleaf, Javascript,Jquery Bootstrap, and MySql.
 
 
 
