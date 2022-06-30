@@ -65,12 +65,12 @@ public class UserService {
 			 User existingUserInDb = userRepository.findById(user.getId()).get();
 			 if(user.getPassword().isEmpty()) {
 				 user.setPassword(existingUserInDb.getPassword());
-		     } else {
+		         } else {
 			     encodePassword(user);
-		     }
+		        }
 		 } else {	 
-			 encodePassword(user);
-	     }
+		    encodePassword(user);
+	         }
 		 return userRepository.save(user);
 	}
 	
@@ -86,9 +86,9 @@ public class UserService {
 		}
 		
 		userInDb.setFirstName(userInAccountForm.getFirstName());
-        userInDb.setLastName(userInAccountForm.getLastName());		
+                userInDb.setLastName(userInAccountForm.getLastName());		
         
-        return userRepository.save(userInDb);
+                return userRepository.save(userInDb);
 	}
 	
 	private void encodePassword(User user) {
@@ -106,6 +106,7 @@ public class UserService {
 			throw new UserNotFoundException("No user with ID: " + id );
 		}
 	}
+	
 	
 	// Delete user
 	public void deleteUserById(Integer id) throws UserNotFoundException {
