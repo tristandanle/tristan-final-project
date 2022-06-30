@@ -51,8 +51,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 				.logout().permitAll()
-				.and().rememberMe()
-				                .key("abcDEFghiJKLmnoPGR_9876543210")  ;
+				.and().rememberMe().key("abcDEFghiJKLmnoPGR_9876543210");
+				                
 				              
 	}
 
