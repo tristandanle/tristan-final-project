@@ -56,7 +56,7 @@ public class AccountController {
 			loggedInUser.setFirstName(user.getFirstName());
 			loggedInUser.setLastName(user.getLastName());
 			
-			redirectAttributes.addFlashAttribute("message", "You account is updated successfully.");
+			redirectAttributes.addFlashAttribute("message", "Your account is updated successfully.");
 
 			return "redirect:/account";
 		}
