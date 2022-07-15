@@ -9,7 +9,7 @@ Users data and photos are fictional for the project works
 Sql script is used to insert users information into database tables 
 
 Project Description 
-   Spring Boot, Spring MVC, Spring Jpa and Unit Test, Spring Security, HTML, Thymeleaf, Javascript,Jquery Bootstrap, and MySql.
+   Spring Boot, Spring MVC, Spring Jpa and Unit Test, Spring Security, HTML, Thymeleaf, Javascript,Jquery, Bootstrap, and MySql.
    Entites:
    1. User
    2. Role
